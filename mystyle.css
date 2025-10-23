@@ -143,3 +143,20 @@ details summary{ cursor:pointer; font-weight:600 }
   .hero img{ max-width:220px; margin:0 auto 10px }
   .links{ display:none }
 }
+
+
+.hero .copy .about-list{
+  color: var(--muted);         /* same dark grey as surrounding meta text */
+  list-style: disc;
+  padding-left: 1.1rem;        /* a touch tighter than global UL */
+  margin: 0;                   /* no extra top/bottom margins */
+}
+
+.hero .copy .about-list li + li{
+  margin-top: 6px;             /* more compact than the global 10px */
+}
+
+/* (optional) Slightly smaller font to blend with paragraph tone */
+@media (min-width: 0){
+  .hero .copy .about-list { font-size: 0.98em; }
+}
