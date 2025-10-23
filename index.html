@@ -15,7 +15,7 @@
   <header>
     <nav class="nav" aria-label="Hauptnavigation">
       <div class="brand">
-        <img src="files/ich.jpg" alt="Porträt von Manfred Scheucher" />
+        <img src="files/ich.jpg" alt="Picture of Manfred Scheucher" />
         <h1>Manfred Scheucher</h1>
       </div>
       <div class="right">
@@ -39,7 +39,6 @@
       </div>
     </section>
 
-    <!-- PUBLICATIONS & PREPRINTS -->
     <section id="publications" class="box shadow" aria-labelledby="publications-h">
       <h2 id="publications-h">Publications</h2>
       <div data-include="publications.html">
@@ -54,8 +53,6 @@
       </div>
     </section>
 
-
-    <!-- THESES -->
     <section id="theses" class="box shadow" aria-labelledby="theses-h">
       <h2 id="theses-h">Theses</h2>
       <div data-include="theses.html">
@@ -75,15 +72,15 @@
   </main>
 
   <script>
-    // E-Mail dezent obfuskieren (als Funktion, damit sie nach Includes aufgerufen werden kann)
+    // obfuscate E-Mail 
     function setEmailLink(){
-      var u = "manfred.scheucher"; var d = "math.tu-berlin.de"; var e = u + "@" + d;
+      var u = "manfred.scheucher"; var d = "proton.me"; var e = u + "@" + d;
       var a = document.getElementById('emailLink');
       if(a){ a.href = 'mailto:' + e; a.textContent = e; }
     }
     setEmailLink();
 
-    // Theme-Toggle (nur Light ↔ Dark)
+    // Theme-Toggle (Light ↔ Dark)
     (function(){
       var KEY = 'theme-pref';
       var btn = document.getElementById('themeBtn');
