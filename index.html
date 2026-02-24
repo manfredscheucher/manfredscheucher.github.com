@@ -107,18 +107,35 @@
       // Client-side includes for section files
     (function(){
       var nodes = document.querySelectorAll('[data-include]');
-      nodes.forEach(async function(el){
+      var promises = [];
+      nodes.forEach(function(el){
         var url = el.getAttribute('data-include');
         if(!url) return;
-        try {
-          var res = await fetch(url, {cache: 'no-cache'});
-          if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
-          var html = await res.text();
-          el.innerHTML = html;
-          // Nachladen kann neue E-Mail-Links enthalten
-          try { setEmailLink(); } catch(_) {}
-        } catch(err){
-          el.innerHTML = '<p class="meta">Could not load <code>'+url+'</code> ('+err.message+').</p>';
+        var promise = fetch(url, {cache: 'no-cache'})
+          .then(function(res){
+            if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+            return res.text();
+          })
+          .then(function(html){
+            el.innerHTML = html;
+            // Lazy-loaded content may contain new email links
+            try { setEmailLink(); } catch(_) {}
+          })
+          .catch(function(err){
+            el.innerHTML = '<p class="meta">Could not load <code>'+url+'</code> ('+err.message+').</p>';
+          });
+        promises.push(promise);
+      });
+
+      // Scroll to hash anchor after all content is loaded
+      Promise.all(promises).then(function(){
+        if(window.location.hash){
+          var target = document.querySelector(window.location.hash);
+          if(target){
+            setTimeout(function(){
+              target.scrollIntoView({behavior: 'smooth'});
+            }, 100);
+          }
         }
       });
     })();
