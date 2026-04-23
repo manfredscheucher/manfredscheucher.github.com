@@ -108,7 +108,7 @@
         var m = (mode === 'dark') ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', m);
         if(btn){
-          btn.textContent = (m === 'dark') ? 'Dark' : 'Light';
+          btn.textContent = (m === 'dark') ? 'Switch to Light Mode' : 'Switch to Dark Mode';
           btn.setAttribute('aria-pressed', (m === 'dark'));
           btn.title = 'Darstellung: ' + btn.textContent + ' – klicken zum Umschalten';
         }

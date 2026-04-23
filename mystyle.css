@@ -208,11 +208,12 @@ details summary{ cursor:pointer; font-weight:600 }
 
 .project-thumb {
   width: 100px;
-  height: 68px;
+  height: auto;
+  max-height: 120px;
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--line);
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 .project-thumb--placeholder {
