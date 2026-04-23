@@ -15,64 +15,84 @@
   <header>
     <nav class="nav" aria-label="Hauptnavigation">
       <div class="brand">
-        <img src="files/ich.jpg" alt="Picture of Manfred Scheucher" />
+        <img src="files/ich1.jpg" alt="Picture of Manfred Scheucher" />
         <h1>Manfred Scheucher</h1>
       </div>
       <div class="right">
-        <div class="links" role="navigation">
-          <a href="#about">About</a>
-          <a href="#preprints">Preprints</a>
-          <a href="#publications">Publications</a>
-          <a href="#theses">Theses</a>
-          <!-- <a href="#talks">Talks</a> -->
-        </div>
         <button class="theme" id="themeBtn" aria-label="Darstellung umschalten">Light</button>
       </div>
     </nav>
   </header>
 
-  <main id="main" class="wrap">
+  <main id="main" class="wrap layout">
 
-    <section id="about" class="box shadow" aria-labelledby="about-h">
-      <div data-include="about.html">
-        <p class="meta">Loading… If this remains visible, upload <code>about.html</code> next to <code>index.html</code>.</p>
-      </div>
-    </section>
+    <!-- Left sidebar: tab navigation -->
+    <nav class="tab-nav" aria-label="Sections">
+      <button class="tab-btn active" data-tab="about">About</button>
+      <button class="tab-btn" data-tab="software">Software</button>
+      <button class="tab-btn" data-tab="academic-software">Academic Software</button>
+      <button class="tab-btn" data-tab="preprints">Preprints</button>
+      <button class="tab-btn" data-tab="publications">Publications</button>
+      <button class="tab-btn" data-tab="theses">Theses</button>
+      <button class="tab-btn" data-tab="talks">Talks</button>
+    </nav>
 
-    <section id="publications" class="box shadow" aria-labelledby="publications-h">
-      <h2 id="publications-h">Publications</h2>
-      <div data-include="publications.html">
-        <p class="meta">Loading… If this remains visible, upload <code>publications.html</code> next to <code>index.html</code>.</p>
-      </div>
-    </section>
+    <!-- Right content area -->
+    <div class="tab-content">
 
-    <section id="preprints" class="box shadow" aria-labelledby="preprints-h">
-      <h2 id="preprints-h">Preprints</h2>
-      <div data-include="preprints.html">
-        <p class="meta">Loading… If this remains visible, upload <code>preprints.html</code> next to <code>index.html</code>.</p>
-      </div>
-    </section>
+      <section id="about" class="tab-panel box shadow active" aria-labelledby="about-h">
+        <div data-include="about.html">
+          <p class="meta">Loading…</p>
+        </div>
+      </section>
 
-    <section id="theses" class="box shadow" aria-labelledby="theses-h">
-      <h2 id="theses-h">Theses</h2>
-      <div data-include="theses.html">
-        <p class="meta">Loading… If this remains visible, upload <code>theses.html</code> next to <code>index.html</code>.</p>
-      </div>
-    </section>
+      <section id="academic-software" class="tab-panel box shadow" aria-labelledby="academic-software-h">
+        <h2 id="academic-software-h">Academic Software</h2>
+        <div data-include="academic-software.html">
+          <p class="meta">Loading…</p>
+        </div>
+      </section>
 
-    <!-- 
-    <section id="talks" class="box shadow" aria-labelledby="talks-h">
-      <h3 id="talks-h">Talks</h3>
-      <div data-include="talks.html">
-        <p class="meta">Loading… If this remains visible, upload <code>talks.html</code> next to <code>index.html</code>.</p>
-      </div>
-    </section>
--->
-    
+      <section id="software" class="tab-panel box shadow" aria-labelledby="software-h">
+        <h2 id="software-h">Software</h2>
+        <div data-include="software.html">
+          <p class="meta">Loading…</p>
+        </div>
+      </section>
+
+      <section id="preprints" class="tab-panel box shadow" aria-labelledby="preprints-h">
+        <h2 id="preprints-h">Preprints</h2>
+        <div data-include="preprints.html">
+          <p class="meta">Loading…</p>
+        </div>
+      </section>
+
+      <section id="publications" class="tab-panel box shadow" aria-labelledby="publications-h">
+        <h2 id="publications-h">Publications</h2>
+        <div data-include="publications.html">
+          <p class="meta">Loading…</p>
+        </div>
+      </section>
+
+      <section id="theses" class="tab-panel box shadow" aria-labelledby="theses-h">
+        <h2 id="theses-h">Theses</h2>
+        <div data-include="theses.html">
+          <p class="meta">Loading…</p>
+        </div>
+      </section>
+
+      <section id="talks" class="tab-panel box shadow" aria-labelledby="talks-h">
+        <h2 id="talks-h">Talks</h2>
+        <div data-include="talks.html">
+          <p class="meta">Loading…</p>
+        </div>
+      </section>
+
+    </div>
   </main>
 
   <script>
-    // obfuscate E-Mail 
+    // obfuscate E-Mail
     function setEmailLink(){
       var u = "manfred.scheucher"; var d = "proton.me"; var e = u + "@" + d;
       var a = document.getElementById('emailLink');
@@ -104,39 +124,46 @@
         });
       }
     })();
-      // Client-side includes for section files
+
+    // Tab switching
+    (function(){
+      var btns = document.querySelectorAll('.tab-btn');
+      var panels = document.querySelectorAll('.tab-panel');
+
+      function activate(id){
+        btns.forEach(function(b){ b.classList.toggle('active', b.dataset.tab === id); });
+        panels.forEach(function(p){ p.classList.toggle('active', p.id === id); });
+        history.replaceState(null, '', '#' + id);
+      }
+
+      btns.forEach(function(btn){
+        btn.addEventListener('click', function(){ activate(btn.dataset.tab); });
+      });
+
+      // Restore from hash
+      var hash = window.location.hash.replace('#','');
+      var valid = ['about','academic-software','software','preprints','publications','theses','talks'];
+      if(valid.indexOf(hash) !== -1){ activate(hash); }
+    })();
+
+    // Client-side includes
     (function(){
       var nodes = document.querySelectorAll('[data-include]');
-      var promises = [];
       nodes.forEach(function(el){
         var url = el.getAttribute('data-include');
         if(!url) return;
-        var promise = fetch(url, {cache: 'no-cache'})
+        fetch(url, {cache: 'no-cache'})
           .then(function(res){
-            if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+            if(!res.ok) throw new Error(res.status);
             return res.text();
           })
           .then(function(html){
             el.innerHTML = html;
-            // Lazy-loaded content may contain new email links
             try { setEmailLink(); } catch(_) {}
           })
           .catch(function(err){
             el.innerHTML = '<p class="meta">Could not load <code>'+url+'</code> ('+err.message+').</p>';
           });
-        promises.push(promise);
-      });
-
-      // Scroll to hash anchor after all content is loaded
-      Promise.all(promises).then(function(){
-        if(window.location.hash){
-          var target = document.querySelector(window.location.hash);
-          if(target){
-            setTimeout(function(){
-              target.scrollIntoView({behavior: 'smooth'});
-            }, 100);
-          }
-        }
       });
     })();
   </script>
