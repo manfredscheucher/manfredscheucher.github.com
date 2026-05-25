@@ -161,6 +161,33 @@
   </li>
 
   <li class="project-card">
+    <div class="project-thumb project-thumb--placeholder" aria-hidden="true">SAT</div>
+    <div class="project-body">
+      <strong class="project-title">Automated NP-Hardness Reductions</strong>
+      <p class="project-desc">
+        A Python framework that automatically discovers NP-hardness reductions for
+        completion problems defined by forbidden sign patterns.
+        Uses a two-layer SAT approach: an outer solver enumerates candidate partial configurations
+        (potential gadgets), while an inner solver verifies that completability matches the
+        target Boolean function. Upset/downset blacklisting efficiently prunes the search space.
+        Generates machine-verifiable certificates, optionally backed by DRAT proofs.
+      </p>
+      <div class="project-meta">
+        <span class="project-label">with</span>
+        Helena Bergold, Felix Schröder
+      </div>
+      <div class="project-links">
+        <span class="project-label">Software</span>
+        <a href="https://github.com/manfredscheucher/supplemental-completion-problems" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="project-links">
+        <span class="project-label">Read</span>
+        <a href="http://arxiv.org/abs/2402.06397" target="_blank" rel="noopener">Finding hardness reductions automatically using SAT solvers (arXiv:2402.06397)</a>
+      </div>
+    </div>
+  </li>
+
+  <li class="project-card">
     <img class="project-thumb" src="files/projects/signotopes/lasagne.png" alt="Signotope visualization" />
     <div class="project-body">
       <strong class="project-title">Signotope Extension</strong>
