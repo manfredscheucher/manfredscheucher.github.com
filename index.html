@@ -29,7 +29,7 @@
     <!-- Left sidebar: tab navigation -->
     <nav class="tab-nav" aria-label="Sections">
       <button class="tab-btn active" data-tab="about">About</button>
-      <button class="tab-btn" data-tab="software">Software</button>
+      <button class="tab-btn" data-tab="blog">Blog</button>
       <button class="tab-btn" data-tab="academic-software">Academic Software</button>
       <button class="tab-btn" data-tab="publications">Publications</button>
       <button class="tab-btn" data-tab="preprints">Preprints</button>
@@ -53,9 +53,9 @@
         </div>
       </section>
 
-      <section id="software" class="tab-panel box shadow" aria-labelledby="software-h">
-        <h2 id="software-h">Open Source Software</h2>
-        <div data-include="software.html">
+      <section id="blog" class="tab-panel box shadow" aria-labelledby="blog-h">
+        <h2 id="blog-h">Blog</h2>
+        <div data-include="blog.html">
           <p class="meta">Loading…</p>
         </div>
       </section>
@@ -142,8 +142,14 @@
 
       // Restore from hash
       var hash = window.location.hash.replace('#','');
-      var valid = ['about','academic-software','software','preprints','publications','theses','talks'];
+      var valid = ['about','academic-software','blog','preprints','publications','theses','talks'];
       if(valid.indexOf(hash) !== -1){ activate(hash); }
+
+      // in-page links like <a href="#publications"> switch the tab
+      window.addEventListener('hashchange', function(){
+        var h = window.location.hash.replace('#','');
+        if(valid.indexOf(h) !== -1){ activate(h); window.scrollTo(0, 0); }
+      });
     })();
 
     // Client-side includes
