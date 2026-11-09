@@ -265,6 +265,7 @@ details summary{ cursor:pointer; font-weight:600 }
 
 /* ========= BLOG ========= */
 .post + .post { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line) }
-.post-title { margin: 0 0 8px; font-size: 17px }
+.post-title { margin: 0 0 2px; font-size: 17px }
+.post-date  { margin: 0 0 8px; font-size: 13px; color: var(--muted) }
 .post p     { margin: 0 0 8px }
 .post-links { font-size: 14px }
