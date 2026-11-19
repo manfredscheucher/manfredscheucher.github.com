@@ -121,6 +121,7 @@ ol.number li::marker{ color:var(--muted); font-weight:600 }
 .badge--conference{ --badge-accent: var(--accent-conf); }
 .badge--journal  { --badge-accent: var(--accent-journal); }
 .badge--preprint { --badge-accent: var(--accent-preprint); }
+.badge--neutral  { --badge-accent: var(--muted); }
 
 /* ========= DETAILS ========= */
 details{
@@ -263,9 +264,24 @@ details summary{ cursor:pointer; font-weight:600 }
   .hero .copy .about-list { font-size: 0.98em; }
 }
 
-/* ========= BLOG ========= */
-.post + .post { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line) }
-.post-title { margin: 0 0 2px; font-size: 17px }
-.post-date  { margin: 0 0 8px; font-size: 13px; color: var(--muted) }
-.post p     { margin: 0 0 8px }
-.post-links { font-size: 14px }
+/* ========= TEXT CARDS (publications, preprints, theses, talks, blog) ========= */
+.project-card--text { grid-template-columns: 1fr; scroll-margin-top:80px }
+.project-head { display:flex; gap:10px; align-items:baseline }
+.project-num  { color:var(--muted); font-size:13px; font-weight:600; white-space:nowrap }
+.project-tags { display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 2px }
+.project-tags .badge, .legend .badge { margin-left:0 }
+.project-card .meta { font-size:14px }
+.project-card p { margin:6px 0 0; font-size:14px }
+.legend { font-size:13px; margin:0 0 12px }
+
+/* "Show more" inside a card: plain, no box */
+.project-more { background:transparent; border:0; border-radius:0; padding:0; margin-top:6px }
+.project-more summary {
+  display:inline-block; list-style:none; font-size:13px; font-weight:500; color:var(--accent);
+}
+.project-more summary::-webkit-details-marker { display:none }
+.project-more summary::before { content:"▸ " }
+.project-more[open] summary::before { content:"▾ " }
+.project-more .more-close, .project-more[open] .more-open { display:none }
+.project-more[open] .more-close { display:inline }
+.project-more .meta { margin-top:6px }
