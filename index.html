@@ -30,7 +30,8 @@
     <nav class="tab-nav" aria-label="Sections">
       <button class="tab-btn active" data-tab="about">About</button>
       <button class="tab-btn" data-tab="blog">Blog</button>
-      <button class="tab-btn" data-tab="academic-software">Academic Software</button>
+      <button class="tab-btn" data-tab="hobby-projects">Hobby projects with AI</button>
+      <button class="tab-btn" data-tab="academic-software">Academic software (before AI)</button>
       <button class="tab-btn" data-tab="publications">Publications</button>
       <button class="tab-btn" data-tab="preprints">Preprints</button>
       <button class="tab-btn" data-tab="theses">Theses</button>
@@ -46,8 +47,15 @@
         </div>
       </section>
 
+      <section id="hobby-projects" class="tab-panel box shadow" aria-labelledby="hobby-projects-h">
+        <h2 id="hobby-projects-h">Hobby projects with AI</h2>
+        <div data-include="hobby-projects.html">
+          <p class="meta">Loading…</p>
+        </div>
+      </section>
+
       <section id="academic-software" class="tab-panel box shadow" aria-labelledby="academic-software-h">
-        <h2 id="academic-software-h">Academic Software</h2>
+        <h2 id="academic-software-h">Academic software (before AI)</h2>
         <div data-include="academic-software.html">
           <p class="meta">Loading…</p>
         </div>
@@ -140,15 +148,23 @@
         btn.addEventListener('click', function(){ activate(btn.dataset.tab); });
       });
 
-      // Restore from hash
-      var hash = window.location.hash.replace('#','');
-      var valid = ['about','academic-software','blog','preprints','publications','theses','talks'];
-      if(valid.indexOf(hash) !== -1){ activate(hash); }
+      var valid = ['about','blog','hobby-projects','academic-software','publications','preprints','theses','talks'];
+
+      // A hash names either a tab or an element inside a tab (e.g. a blog post).
+      function goTo(h, scroll){
+        if(valid.indexOf(h) !== -1){ activate(h); if(scroll) window.scrollTo(0, 0); return; }
+        var el = document.getElementById(h);
+        var panel = el && el.closest('.tab-panel');
+        if(panel){ activate(panel.id); history.replaceState(null, '', '#' + h); el.scrollIntoView(); }
+      }
+
+      // Restore from hash; the includes below call this again once their content is there
+      window.goToHash = function(){ goTo(window.location.hash.replace('#',''), false); };
+      window.goToHash();
 
       // in-page links like <a href="#publications"> switch the tab
       window.addEventListener('hashchange', function(){
-        var h = window.location.hash.replace('#','');
-        if(valid.indexOf(h) !== -1){ activate(h); window.scrollTo(0, 0); }
+        goTo(window.location.hash.replace('#',''), true);
       });
     })();
 
@@ -165,7 +181,7 @@
           })
           .then(function(html){
             el.innerHTML = html;
-            try { setEmailLink(); } catch(_) {}
+            try { setEmailLink(); window.goToHash(); } catch(_) {}
           })
           .catch(function(err){
             el.innerHTML = '<p class="meta">Could not load <code>'+url+'</code> ('+err.message+').</p>';
