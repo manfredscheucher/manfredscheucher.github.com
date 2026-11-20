@@ -1,17 +1,17 @@
 /* Animated background: floating circles + faint lines
-   - rein CSS, kein JS
-   - passt sich Light/Dark via deinen CSS-Variablen an
-   - respektiert prefers-reduced-motion
+   - pure CSS, no JS
+   - follows light/dark via the CSS variables
+   - respects prefers-reduced-motion
 */
 
 :root{
-  /* Intensität und Bewegung feinjustieren */
+  /* Fine-tune intensity and motion */
   --bg-anim-opacity: .55;   /* 0.0 – 1.0 */
-  --bg-anim-blur: 32px;     /* weiche Kanten */
-  --bg-anim-speed: 60s;     /* Kreise */
-  --bg-anim-speed2: 90s;    /* Linien */
+  --bg-anim-blur: 32px;     /* soft edges */
+  --bg-anim-speed: 60s;     /* circles */
+  --bg-anim-speed2: 90s;    /* lines */
 
-  /* Falls die Badge-Farben noch nicht gesetzt sind, hier Fallbacks */
+  /* Fallbacks in case the badge colors are not set yet */
   --accent-conf: var(--accent);
   --accent-journal: #22c55e;
   --accent-preprint: #ef4444;
@@ -20,21 +20,21 @@
   :root{
     --accent-journal: #34d399;
     --accent-preprint: #f87171;
-    --bg-anim-opacity: .45; /* im Dark Mode etwas dezenter */
+    --bg-anim-opacity: .45; /* a bit subtler in dark mode */
   }
 }
 
-/* Die Content-Layer klar über den animierten Pseudo-Layern halten */
+/* Keep the content layers above the animated pseudo layers */
 header, .wrap { position: relative; z-index: 1; }
 
-/* ====== Kreise (weiche Farbflecken) ======
-   Mehrere radial-gradient-Layer werden sanft gedriftet.
-   Farben sind an deine Accent-/Badge-Töne angelehnt. */
+/* ====== Circles (soft color blobs) ======
+   Several radial-gradient layers drift slowly.
+   Colors follow the accent/badge colors. */
 body::before{
   content:"";
   position: fixed; inset: 0;
   pointer-events: none;
-  /* sechs pseudo-zufällige Bubbles */
+  /* six pseudo-random bubbles */
   background:
     radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--accent) 22%, transparent) 0 130px, transparent 140px),
     radial-gradient(circle at 80% 35%, color-mix(in srgb, var(--accent-journal) 18%, transparent) 0 120px, transparent 130px),
@@ -46,7 +46,7 @@ body::before{
   opacity: var(--bg-anim-opacity);
   transform: translateZ(0);
   animation: float-circles var(--bg-anim-speed) linear infinite;
-  /* sorgt dafür, dass es HINTER deinen Boxen liegt */
+  /* keeps it BEHIND the boxes */
   z-index: 0;
 }
 
@@ -56,9 +56,9 @@ body::before{
   100% { background-position:  0    0,   0    0,   0    0,   0    0,   0    0,   0    0; }
 }
 
-/* ====== Linien (feine, halbtransparente Diagonalen) ======
-   Drei lineare Layer mit unterschiedlichem Raster/Drift.
-   Sehr dezent, blendet weich mit dem Hintergrund. */
+/* ====== Lines (fine, semi-transparent diagonals) ======
+   Three linear layers with different grid/drift.
+   Very subtle, blends softly with the background. */
 body::after{
   content:"";
   position: fixed; inset: 0;
@@ -78,7 +78,7 @@ body::after{
   to   { background-position: 160px 120px, -220px 140px, 200px -180px; }
 }
 
-/* Bewegungen abschalten, falls gewünscht */
+/* Turn off motion if requested */
 @media (prefers-reduced-motion: reduce){
   body::before, body::after { animation: none !important; }
 }

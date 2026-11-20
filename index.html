@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,15 +11,15 @@
   <link rel="stylesheet" href="bg-anim.css">
 </head>
 <body>
-  <a class="skip" href="#main">Zum Inhalt springen</a>
+  <a class="skip" href="#main">Skip to content</a>
   <header>
-    <nav class="nav" aria-label="Hauptnavigation">
+    <nav class="nav" aria-label="Main navigation">
       <div class="brand">
         <img src="files/ich1.jpg" alt="Picture of Manfred Scheucher" />
         <h1>Manfred Scheucher</h1>
       </div>
       <div class="right">
-        <button class="theme" id="themeBtn" aria-label="Darstellung umschalten">Light</button>
+        <button class="theme" id="themeBtn" aria-label="Toggle theme">Light</button>
       </div>
     </nav>
   </header>
@@ -100,7 +100,7 @@
   </main>
 
   <script>
-    // obfuscate E-Mail
+    // obfuscate email
     function setEmailLink(){
       var u = "manfred.scheucher"; var d = "proton.me"; var e = u + "@" + d;
       var a = document.getElementById('emailLink');
@@ -108,7 +108,7 @@
     }
     setEmailLink();
 
-    // Theme-Toggle (Light ↔ Dark)
+    // Theme toggle (light/dark)
     (function(){
       var KEY = 'theme-pref';
       var btn = document.getElementById('themeBtn');
@@ -118,7 +118,7 @@
         if(btn){
           btn.textContent = (m === 'dark') ? 'Switch to Light Mode' : 'Switch to Dark Mode';
           btn.setAttribute('aria-pressed', (m === 'dark'));
-          btn.title = 'Darstellung: ' + btn.textContent + ' – klicken zum Umschalten';
+          btn.title = btn.textContent;
         }
       }
       var pref = localStorage.getItem(KEY);

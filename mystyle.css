@@ -4,19 +4,19 @@
   --panel:#f7f9fc; --accent:#0ea5e9; --max:880px; --r:14px;
   color-scheme: light dark;
 
-  /* Badge-/Chip-Varianten (Typfarben) */
-  --accent-conf: var(--accent); /* blau (Konferenz) */
-  --accent-journal: #22c55e;    /* grün  */
-  --accent-preprint: #ef4444;   /* rot   */
+  /* Badge/chip variants (type colors) */
+  --accent-conf: var(--accent); /* blue (conference) */
+  --accent-journal: #22c55e;    /* green */
+  --accent-preprint: #ef4444;   /* red   */
 }
 @media (prefers-color-scheme: dark){
   :root{
     --bg:#0b0c0f; --fg:#e8eaed; --muted:#a6adbb; --line:#23262d; --panel:#15171a; --accent:#4cc9f0;
-    --accent-journal:#34d399;  /* etwas heller im Dark Mode */
+    --accent-journal:#34d399;  /* a bit lighter in dark mode */
     --accent-preprint:#f87171;
   }
 }
-/* explizite Umschaltung via data-theme (Light/Dark-Button) */
+/* explicit switch via data-theme (light/dark button) */
 html[data-theme='light']{ --bg:#ffffff; --fg:#0b1220; --muted:#5b667a; --line:#e8ecf2; --panel:#f7f9fc; --accent:#0ea5e9; }
 html[data-theme='dark'] { --bg:#0b0c0f; --fg:#e8eaed; --muted:#a6adbb; --line:#23262d; --panel:#15171a; --accent:#4cc9f0; }
 
@@ -50,7 +50,7 @@ header{
 .skip{ position:absolute; left:-9999px }
 .skip:focus{ left:8px; top:8px; background:var(--bg); padding:8px 12px; border-radius:10px; outline:2px solid var(--accent) }
 
-/* ========= SECTIONS / BOXEN ========= */
+/* ========= SECTIONS / BOXES ========= */
 section{ margin:18px 0; padding:0; border:0; scroll-margin-top:80px }
 .box{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r); padding:18px }
 .shadow{ box-shadow:0 1px 0 rgba(0,0,0,.04) }
@@ -58,9 +58,9 @@ section{ margin:18px 0; padding:0; border:0; scroll-margin-top:80px }
 /* ========= HERO (About) ========= */
 .hero{
   display:grid;
-  grid-template-columns: clamp(140px, 28%, 220px) 1fr; /* responsive Bildspalte */
+  grid-template-columns: clamp(140px, 28%, 220px) 1fr; /* responsive image column */
   gap:24px;
-  align-items:center; /* Bild & Text vertikal ausbalanciert */
+  align-items:center; /* image and text vertically balanced */
 }
 .hero img{
   width:100%; height:auto; display:block;
@@ -71,7 +71,7 @@ section{ margin:18px 0; padding:0; border:0; scroll-margin-top:80px }
 .hero p{  margin:0 0 10px; color:var(--muted) }
 .hero ol{  margin:0 0 10px; color:var(--muted); padding-left:1.5rem; }
 .hero ul{  margin:0 0 10px; color:var(--muted) }
-.hero .copy{ max-width:65ch } /* bessere Zeilenlänge */
+.hero .copy{ max-width:65ch } /* better line length */
 
 /* ========= SOCIAL CHIPS ========= */
 .social{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px }
@@ -88,16 +88,16 @@ section{ margin:18px 0; padding:0; border:0; scroll-margin-top:80px }
 h2{ margin:0 0 14px; font-size:22px }
 h3{ margin:0 0 12px; font-size:20px }
 
-/* ========= LISTEN ========= */
-/* Default UL mit Bullets */
+/* ========= LISTS ========= */
+/* Default UL with bullets */
 ul,ol{ padding-left:1.5rem; margin:0 }
 
-/* Utility-Klassen für flache Listen */
-.list{ list-style:none; padding-left:0; margin:0 }           /* bulletlos */
-.list.bulleted{ list-style:disc; padding-left:1.25rem }     /* Bullets wieder aktiv */
+/* Utility classes for flat lists */
+.list{ list-style:none; padding-left:0; margin:0 }           /* no bullets */
+.list.bulleted{ list-style:disc; padding-left:1.25rem }     /* bullets back on */
 .list li + li, .list.bulleted li + li{ margin-top:10px }
 
-/* Nummerierte, absteigend sortierte Listen (Publications/Preprints) */
+/* Numbered lists in descending order (publications/preprints) */
 ol.number{
   margin:0; padding-left:1.25rem;
   list-style:decimal; list-style-position:outside;
@@ -108,16 +108,16 @@ ol.number li::marker{ color:var(--muted); font-weight:600 }
 /* ========= META & BADGES ========= */
 .meta{ color:var(--muted) }
 
-/* Ein Basis-Block, der die Farbe aus --badge-accent nimmt */
+/* Base block that takes its color from --badge-accent */
 .badge{
-  --badge-accent: var(--accent-conf); /* Default: conference-blau */
+  --badge-accent: var(--accent-conf); /* default: conference blue */
   display:inline-block; font-size:12px; padding:2px 10px; border-radius:999px; margin-left:8px;
   font-weight:500;
   background: color-mix(in srgb, var(--badge-accent) 16%, var(--bg));
   border: 1px solid color-mix(in srgb, var(--badge-accent) 38%, var(--bg));
   color: var(--fg);
 }
-/* Varianten setzen nur die Variable – keine Spezifitätskämpfe */
+/* Variants only set the variable, no specificity fights */
 .badge--conference{ --badge-accent: var(--accent-conf); }
 .badge--journal  { --badge-accent: var(--accent-journal); }
 .badge--preprint { --badge-accent: var(--accent-preprint); }
@@ -131,7 +131,7 @@ details{
 details + details{ margin-top:10px }
 details summary{ cursor:pointer; font-weight:600 }
 
-/* ========= SECTION-INDEX (Chips oben) ========= */
+/* ========= SECTION INDEX (chips on top) ========= */
 .index{ display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 8px }
 .index a{
   display:inline-flex; align-items:center; gap:8px;
