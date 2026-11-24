@@ -275,13 +275,16 @@ details summary{ cursor:pointer; font-weight:600 }
 .legend { font-size:13px; margin:0 0 12px }
 
 /* "Show more" inside a card: plain, no box */
-.project-more { background:transparent; border:0; border-radius:0; padding:0; margin-top:6px }
+.project-more { background:transparent; border:0; border-radius:0; padding:0; margin-top:4px }
+.project-authors { margin-top:2px }
 .project-more summary {
-  display:inline-block; list-style:none; font-size:13px; font-weight:500; color:var(--accent);
+  display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; list-style:none; cursor:pointer;
 }
 .project-more summary::-webkit-details-marker { display:none }
-.project-more summary::before { content:"▸ " }
-.project-more[open] summary::before { content:"▾ " }
+.project-more summary .project-tags { margin:0 }
+.more-toggle { font-size:13px; font-weight:500; color:var(--accent) }
+.more-toggle::before { content:"▸ " }
+.project-more[open] .more-toggle::before { content:"▾ " }
 .project-more .more-close, .project-more[open] .more-open { display:none }
 .project-more[open] .more-close { display:inline }
 .project-more .meta { margin-top:6px }
