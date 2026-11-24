@@ -36,6 +36,7 @@
       <button class="tab-btn" data-tab="preprints">Preprints</button>
       <button class="tab-btn" data-tab="theses">Theses</button>
       <button class="tab-btn" data-tab="talks">Talks</button>
+      <button class="tab-btn" data-tab="terms-privacy">Terms &amp; privacy</button>
     </nav>
 
     <!-- Right content area -->
@@ -96,6 +97,13 @@
         </div>
       </section>
 
+      <section id="terms-privacy" class="tab-panel box shadow" aria-labelledby="terms-privacy-h">
+        <h2 id="terms-privacy-h">Terms &amp; privacy</h2>
+        <div data-include="terms-privacy.html">
+          <p class="meta">Loading…</p>
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -148,7 +156,7 @@
         btn.addEventListener('click', function(){ activate(btn.dataset.tab); });
       });
 
-      var valid = ['about','blog','hobby-projects','academic-software','publications','preprints','theses','talks'];
+      var valid = ['about','blog','hobby-projects','academic-software','publications','preprints','theses','talks','terms-privacy'];
 
       // A hash names either a tab or an element inside a tab (e.g. a blog post).
       function goTo(h, scroll){
