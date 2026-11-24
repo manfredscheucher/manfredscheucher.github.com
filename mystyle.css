@@ -266,10 +266,11 @@ details summary{ cursor:pointer; font-weight:600 }
 
 /* ========= TEXT CARDS (publications, preprints, theses, talks, blog) ========= */
 .project-card--text { grid-template-columns: 1fr; scroll-margin-top:80px }
-.project-head { display:flex; gap:10px; align-items:baseline }
-.project-head .project-tags { margin:0; flex-shrink:0; flex-wrap:nowrap }
+.project-head { display:flex; flex-wrap:wrap; gap:4px 10px; align-items:baseline }
+.project-head .project-tags { flex:0 0 auto; max-width:100% }
+.project-head .project-title { flex:1 1 10em; min-width:0; margin-bottom:0 }
 .project-num  { color:var(--muted); font-size:13px; font-weight:600; white-space:nowrap }
-.project-tags { display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 2px }
+.project-tags { display:flex; flex-wrap:wrap; gap:6px }
 .project-tags .badge, .legend .badge { margin-left:0 }
 .project-card .meta { font-size:14px }
 .project-card p { margin:6px 0 0; font-size:14px }
@@ -277,12 +278,15 @@ details summary{ cursor:pointer; font-weight:600 }
 
 /* "Show more" inside a card: plain, no box */
 .project-more { background:transparent; border:0; border-radius:0; padding:0; margin-top:4px }
-.project-authors { margin-top:2px }
+
 .project-more summary {
-  display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; list-style:none; cursor:pointer;
+  display:inline-block; white-space:nowrap; list-style:none; cursor:pointer;
 }
+/* "Show more" after the authors in the same line if it fits, else in its own line */
+.project-authors, .project-authors + .project-more { display:inline }
+.project-authors { margin-right:10px }
+.project-authors + .project-more .meta { display:block }
 .project-more summary::-webkit-details-marker { display:none }
-.project-more summary .project-tags { margin:0 }
 .more-toggle { font-size:13px; font-weight:500; color:var(--accent) }
 .more-toggle::before { content:"▸ " }
 .project-more[open] .more-toggle::before { content:"▾ " }
