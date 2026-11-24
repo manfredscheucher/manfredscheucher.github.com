@@ -267,6 +267,7 @@ details summary{ cursor:pointer; font-weight:600 }
 /* ========= TEXT CARDS (publications, preprints, theses, talks, blog) ========= */
 .project-card--text { grid-template-columns: 1fr; scroll-margin-top:80px }
 .project-head { display:flex; gap:10px; align-items:baseline }
+.project-head .project-tags { margin:0; flex-shrink:0; flex-wrap:nowrap }
 .project-num  { color:var(--muted); font-size:13px; font-weight:600; white-space:nowrap }
 .project-tags { display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 2px }
 .project-tags .badge, .legend .badge { margin-left:0 }
